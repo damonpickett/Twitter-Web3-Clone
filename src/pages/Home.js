@@ -3,21 +3,27 @@ import "./Home.css";
 import { defaultImgs } from "../defaultimgs";
 import { TextArea, Icon } from "web3uikit";
 import { useState, useRef } from "react";
+import TweetInFeed from '../components/TweetInFeed';
 
 const Home = () => {
 
   const inputFile = useRef(null);
   const [selectedFile, setSelectedFile] = useState();
 
+  // This function essentially activated the changeHandler function below...
+  // It stimulates the click event
+  // It is the div that is clicked, but the clicking of the div...
+  // Is anchored to the input by the input's 'ref={inputFile}'
   const onImageClick = () => {
     inputFile.current.click();
-    console.log(inputFile)
   };
 
   const changeHandler = (event) => {
     const img = event.target.files[0];
     setSelectedFile(URL.createObjectURL(img));
   };
+
+  console.log(selectedFile)
 
   return (
     <>
@@ -35,16 +41,17 @@ const Home = () => {
               value='GM World'
               type='text'
               width='95%'
-            >
-            </TextArea>
-
+            ></TextArea>
+            {selectedFile && (
+              <img src={selectedFile} className='tweetImg' alt='tweet'></img>
+            )}
             <div className="imgOrTweet">
               <div className="imgDiv" onClick={onImageClick}>
                 <input
                   type='file'
                   name='file'
                   ref={inputFile}
-                  // onChange={changeHandler}
+                  onChange={changeHandler}
                   style={{ display: "none" }}
                 />
                 <Icon fill='#1DA1F2'size={20} svg='image'></Icon>
@@ -59,6 +66,7 @@ const Home = () => {
 
           </div>
         </div>
+        <TweetInFeed profile={false} />
       </div>
     </>
   );
