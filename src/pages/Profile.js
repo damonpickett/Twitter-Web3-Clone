@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Profile.css';
+import { defaultImgs } from "../defaultimgs";
+import TweetInFeed from "../components/TweetInFeed";
 
 
 const Profile = () => {
@@ -8,17 +10,25 @@ const Profile = () => {
 
   return (
     <>
-    <Link to="/">
-        <div>Home</div>
+    <div className="pageIdentify">Profile</div>
+    <img className='profileBanner' src={defaultImgs[1]} alt='banner'></img>
+    <div className="pfpContainer">
+      <img className='profilePFP' src={defaultImgs[0]} alt='profile'></img>
+      <div className="profileName">Juhizzz</div>
+      <div className="profileWallet">0x42..314</div>
+      <Link to='/settings'>
+        <div className="profileEdit">Edit Profile</div>
       </Link>
-      <Link to="/profile">
-        <div>Profile</div>
-      </Link>
-
-      <Link to="/settings">
-        <div>Settings</div>
-      </Link>
-
+      <div className='profileBio'>
+        Your Average Web3 Mage
+      </div>
+      <div className="profileTabs">
+        <div className="profileTab">
+          Your Tweets
+        </div>
+      </div>
+    </div>
+    <TweetInFeed profile={true}></TweetInFeed>
     </>
   );
 };
