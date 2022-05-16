@@ -6,14 +6,28 @@ import Settings from "./pages/Settings";
 import Sidebar from "./components/Sidebar";
 import Rightbar from "./components/Rightbar";
 import "./App.css";
+import { useMoralis } from "react-moralis";
+import { ConnectButton, Icon } from "web3uikit";
 
 const App = () => {
+  const { isAuthenticated, Moralis } = useMoralis();
 
   return (
     <>
+    {isAuthenticated ? (
       <div className="page">
         <div className="sideBar">
           <Sidebar />
+          <div
+            className="page"
+            onClick={() => {
+              Moralis.User.logOut().then(() => {
+                window.location.reload();
+              })
+            }}
+            >
+              Logout
+            </div>
         </div>
           <div className="mainWindow">
             <Routes>
@@ -26,6 +40,12 @@ const App = () => {
           <Rightbar />
         </div>
       </div>
+    ) : (
+      <div className='loginPage'>
+        <Icon fill="#ffffff" size={40} svg="twitter" />
+        <ConnectButton />
+      </div>
+    )}
     </>
   );
 };
