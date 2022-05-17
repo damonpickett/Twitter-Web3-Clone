@@ -23,8 +23,6 @@ const Home = () => {
     setSelectedFile(URL.createObjectURL(img));
   };
 
-  console.log(selectedFile)
-
   return (
     <>
     <div className="pageIdentify">Home</div>

@@ -19,33 +19,34 @@ const App = () => {
         <div className="sideBar">
           <Sidebar />
           <div
-            className="page"
-            onClick={() => {
-              Moralis.User.logOut().then(() => {
-                window.location.reload();
-              })
-            }}
+              className="logout"
+              onClick={() => {
+                Moralis.User.logOut().then(() => {
+                  window.location.reload();
+                });
+              }}
             >
               Logout
             </div>
         </div>
-          <div className="mainWindow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/settings" element={<Settings />} />
-            </Routes>
-          </div>
+        <div className="mainWindow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </div>
         <div className="rightBar">
           <Rightbar />
         </div>
       </div>
-    ) : (
-      <div className='loginPage'>
-        <Icon fill="#ffffff" size={40} svg="twitter" />
-        <ConnectButton />
-      </div>
-    )}
+      ) : (
+        <div className="loginPage">
+          <Icon fill="#ffffff" size={40} svg="twitter" />
+          <ConnectButton />
+        </div>
+
+      )}
     </>
   );
 };
